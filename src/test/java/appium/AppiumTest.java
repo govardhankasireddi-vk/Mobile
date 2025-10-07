@@ -31,6 +31,7 @@ public class AppiumTest {
         caps.setCapability("appPackage", appMap.get("app")[0]);
         caps.setCapability("appActivity", appMap.get("app")[1]);
         caps.setCapability("newCommandTimeout", 300);
+        caps.setCapability("autoGrantPermissions", true);
 
 //            caps.setCapability("appPackage", "com.google.android.deskclock");
 //            caps.setCapability("appActivity", "com.android.deskclock.DeskClock");
@@ -59,6 +60,9 @@ public class AppiumTest {
                 break;
             case "swag":
                 appMap.put("app", new String[]{"com.swaglabsmobileapp", "com.swaglabsmobileapp.MainActivity"});
+
+            case "urbuddi":
+                appMap.put("app", new String[]{"com.urbuddiapp", "com.urbuddiapp.MainActivity"});
                 break;
 
             default:

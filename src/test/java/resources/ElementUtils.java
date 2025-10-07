@@ -68,13 +68,13 @@ public class ElementUtils {
     public void click(WebElement element) {
         try {
             if (element.isDisplayed()) {
-                elementClickable(element, 10L);
+                elementClickable(element, 5L);
                 element.click();
             }
 
         } catch (Exception e) {
-            scrollDown();
-            visibilityOfElement(element,5L);
+            //scrollDown();
+            visibilityOfElement(element,10L);
             elementClickable(element, 10L);
             element.click();
             scrollUp();
