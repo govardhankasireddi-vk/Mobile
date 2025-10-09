@@ -86,4 +86,51 @@ public class UrbuddiApp {
 
     }
 
+    @When("user click on the Leave Requests")
+    public void userClickOnTheLeaveRequests() {
+        urbuddiLeavePage.viewRequests();
+
+    }
+
+    @And("Approve the Leave")
+    public void approveTheLeave() {
+        urbuddiLeavePage.approveLeaveRequest();
+
+    }
+
+    @Then("leave should be approve")
+    public void leaveShouldBeApprove() {
+        System.out.println("Leave Approved ");
+    }
+
+    @And("reject the Leave")
+    public void rejectTheLeave() {
+        urbuddiLeavePage.rejectLeaveRequest();
+    }
+
+    @Then("leave should be rejected")
+    public void leaveShouldBeRejected() {
+        System.out.println("Leave Rejected ");
+    }
+
+    @When("user click on the work")
+    public void userClickOnTheWork() {
+        urbuddiHomePage.clikOnWork();
+
+    }
+
+    @And("user click on the apply work")
+    public void userClickOnTheApplyWork() {
+        urbuddiHomePage.clickApplyWork();
+
+    }
+
+    @And("enter the work details")
+    public void enterTheWorkDetails() {
+
+    }
+
+    @Then("work should be added")
+    public void workShouldBeAdded() {
+    }
 }

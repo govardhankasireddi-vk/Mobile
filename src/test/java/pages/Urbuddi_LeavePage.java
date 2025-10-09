@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import resources.ElementUtils;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Urbuddi_LeavePage extends ElementUtils {
 
@@ -23,9 +24,18 @@ public class Urbuddi_LeavePage extends ElementUtils {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"reason\")") private WebElement reasonTxt;
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"APPLY FOR LEAVE\")") private WebElement Leavebtn;
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Okay\")") private WebElement confirmBtn;
-    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.view.ViewGroup[@index='8']//android.widget.TextView[@index='0']") private WebElement currentmonth;
+    @AndroidFindBy(xpath = "//android.widget.ScrollView//android.view.ViewGroup[@index='8']//android.widget.TextView[@index='0']") private WebElement currentMonth;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\")") private WebElement nextBtn;
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Leave request submitted\")") private WebElement confirmationMsg;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Requests\")") private WebElement RequestsMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"PENDING\")") private WebElement pendingTab;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"VIEW\").instance(0)") private WebElement viewRequestDetails;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"APPROVE\").instance(0)") private WebElement approveBtn;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"REJECT\").instance(0)") private WebElement rejectbtn;
+    @AndroidFindBy(xpath = "//android.widget.EditText") private WebElement rejectReasonTxt;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"REJECT LEAVE REQUEST\")") private WebElement rejectLeaveBtn;
+    @AndroidFindBy(xpath =  "//android.widget.ScrollView/android.view.ViewGroup[@index='0']/android.view.ViewGroup/android.widget.TextView[@index='0']") private List<WebElement> employeeNames;
+
 
 
     public Urbuddi_LeavePage(AndroidDriver driver) {
@@ -46,10 +56,10 @@ public class Urbuddi_LeavePage extends ElementUtils {
     public void setStartDate(String day , String month){
 
         click(startDate);
-        System.out.println(getText(currentmonth));
+        System.out.println(getText(currentMonth));
         int count = 0;
         while ( count == 0) {
-            if (month.equalsIgnoreCase(getText(currentmonth))) {
+            if (month.equalsIgnoreCase(getText(currentMonth))) {
                 String daySelector = String.format("//android.view.ViewGroup[@content-desc='%s']", day);
                 WebElement dayElement = driver.findElement(By.xpath(daySelector));
                 click(dayElement);
@@ -65,7 +75,7 @@ public class Urbuddi_LeavePage extends ElementUtils {
         //click(endDate);
         int count = 0;
         while (count == 0) {
-            if (month.equalsIgnoreCase(getText(currentmonth))) {
+            if (month.equalsIgnoreCase(getText(currentMonth))) {
                 String daySelector = String.format("//android.view.ViewGroup[@content-desc='%s']", day);
                 wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(daySelector))));
@@ -97,6 +107,25 @@ public class Urbuddi_LeavePage extends ElementUtils {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void viewRequests(){
+        click(RequestsMenu);
+        click(pendingTab);
+        visibilityOfElement(viewRequestDetails,15L);
+        for(WebElement e : employeeNames){
+            System.out.println(e.getText());
+        }
+        System.out.println(employeeNames.size());
+        click(viewRequestDetails);
+    }
+    public void approveLeaveRequest(){
+        click(approveBtn);
+    }
+    public void rejectLeaveRequest(){
+        click(rejectbtn);
+        sendKeysWhenVisible(rejectReasonTxt,"rejected");
+        click(rejectLeaveBtn);
     }
 
 }

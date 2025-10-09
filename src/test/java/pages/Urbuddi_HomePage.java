@@ -12,6 +12,8 @@ import java.time.Duration;
 public class Urbuddi_HomePage extends ElementUtils {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)") private WebElement empPhoto;
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Leaves\")")  private WebElement leavesMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Work\").instance(1)") private WebElement workMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Apply Work\")") private WebElement applyWorkBtn;
 
     public Urbuddi_HomePage(AndroidDriver driver) {
         super(driver);
@@ -31,5 +33,10 @@ public class Urbuddi_HomePage extends ElementUtils {
     public void clikOnLeave(){
         click(leavesMenu);
     }
+    public void clikOnWork(){
+        click(workMenu);
+    }
+    public void clickApplyWork(){click(applyWorkBtn);}
+
 
 }
